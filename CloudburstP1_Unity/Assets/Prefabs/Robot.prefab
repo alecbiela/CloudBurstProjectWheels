@@ -13,7 +13,7 @@ GameObject:
   - 61: {fileID: 6148076}
   - 114: {fileID: 11483208}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,6 +81,8 @@ MonoBehaviour:
   jumpForce: 500
   maxVelocity: 2
   mass: 1
+  slidingCol: {fileID: 0}
+  notSlidingCol: {fileID: 0}
 --- !u!212 &21269780
 SpriteRenderer:
   m_ObjectHideFlags: 1
