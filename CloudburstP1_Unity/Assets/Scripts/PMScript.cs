@@ -3,12 +3,10 @@ using System.Collections;
 
 public class PMScript : MonoBehaviour {
 
-    public GameManager GM;
-
 	// Use this for initialization
 	void Start ()
     {
-        GM.TogglePauseMenu();
+        TogglePauseMenu();
     }
 
     // Update is called once per frame
@@ -19,7 +17,7 @@ public class PMScript : MonoBehaviour {
 
     void ScanForKeyStroke()
     {
-        if (Input.GetKeyDown("p"))
+        if (Input.GetKeyDown("p") || Input.GetKeyDown("P"))
         {
             TogglePauseMenu();
         }
@@ -39,6 +37,6 @@ public class PMScript : MonoBehaviour {
             Time.timeScale = 0f;
         }
 
-        Debug.Log("GAMEMANAGER:: TimeScale: " + Time.timeScale);
+        Debug.Log("TimeScale: " + Time.timeScale);
     }
 }
