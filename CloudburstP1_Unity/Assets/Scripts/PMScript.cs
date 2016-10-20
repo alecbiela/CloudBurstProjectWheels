@@ -17,7 +17,7 @@ public class PMScript : MonoBehaviour {
 
     void ScanForKeyStroke()
     {
-        if (Input.GetKeyDown("p") || Input.GetKeyDown("P"))
+        if (Input.GetKeyDown("p"))
         {
             TogglePauseMenu();
         }
