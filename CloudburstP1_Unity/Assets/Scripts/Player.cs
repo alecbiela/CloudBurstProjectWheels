@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    bool jumpButtonPressed, slideCrouchButtonPressed = false;
+    bool jumpButtonPressed, slideCrouchButtonPressed, fireButtonPressed = false;
     bool inAir = true;
     bool running, walking, crouching, sliding = false;
+    bool firing = false;
 
-    float moveHoriz, moveVert, jump, run, slideCrouch = 0;
+    float moveHoriz, moveVert, jump, run, slideCrouch, fire = 0;
 
     Vector2 initialColliderSize;
 
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour {
     public float maxVelocity = 2;
     public float mass = 1;
     public BoxCollider2D slidingCol, notSlidingCol;
+    public GameObject bulletPrefab;
 
     public Vector2 Velocity { get { return velocity; } }
 
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         Move();
+        CheckCombat();
     }
 
     //checks inputs and sets flags accordingly
@@ -60,6 +63,7 @@ public class Player : MonoBehaviour {
 
         slideCrouch = Input.GetAxisRaw("SlideCrouch");
 
+        fire = Input.GetAxisRaw("Fire1");
     }
 
     void Move()
@@ -92,6 +96,7 @@ public class Player : MonoBehaviour {
 
         //accounts for sliding and crouching
         SlideOrCrouch();
+
 
         //flips orientation of sprite based on movement direction
         if (rigidB.velocity.x < 0) this.GetComponent<SpriteRenderer>().flipX = true;
@@ -195,6 +200,30 @@ public class Player : MonoBehaviour {
             jumpButtonPressed = false;
         }
     }
+
+    //handles combat w/ varying styles
+    public void CheckCombat()
+    {
+        //accounts for firing bullets
+        if(fire != 0 && !fireButtonPressed)
+        {
+            fireButtonPressed = true;
+
+            if (this.GetComponent<SpriteRenderer>().flipX)
+            {
+                Vector3 cloneOffset = new Vector3(-1, 0, 0);
+                GameObject clone = (GameObject)Instantiate(bulletPrefab, transform.position + cloneOffset, transform.rotation);
+                clone.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(-1000, 0));
+            }
+            else {
+                Vector3 cloneOffset = new Vector3(1, 0, 0);
+                GameObject clone = (GameObject)Instantiate(bulletPrefab, transform.position + cloneOffset, transform.rotation);
+                clone.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(1000, 0));
+            }
+        }
+        if (fire == 0) fireButtonPressed = false;
+    }
+
 
     //collision detection
     void OnCollisionEnter2D(Collision2D col)
