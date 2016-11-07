@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - weapon
+  - Terrain
+  - Pause Menu
+  - Enemy
   layers:
   - Default
   - TransparentFX
