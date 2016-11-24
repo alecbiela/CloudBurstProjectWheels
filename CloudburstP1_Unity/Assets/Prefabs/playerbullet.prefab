@@ -25,7 +25,7 @@ GameObject:
   - 114: {fileID: 114000010502672710}
   m_Layer: 0
   m_Name: playerbullet
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

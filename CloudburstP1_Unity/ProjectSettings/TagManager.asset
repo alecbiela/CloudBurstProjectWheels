@@ -8,6 +8,9 @@ TagManager:
   - Terrain
   - Pause Menu
   - Enemy
+  - EnemyProjectile
+  - PlayerProjectile
+  - HUD
   layers:
   - Default
   - TransparentFX

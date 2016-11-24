@@ -71,6 +71,10 @@ public class Enemy : MonoBehaviour
 			rigidB.AddForce (new Vector2 (rigidB.velocity.x * pushForce * -1.0f, 0.0f));
 			target.GetComponent<Rigidbody2D>().AddForce (new Vector2 (playerInfo.Velocity.x * pushForce * -1.0f, 0.0f));
 		}
+        if(playerBox.gameObject.tag == "PlayerProjectile")
+        {
+            DestroyObject(gameObject);
+        }
 	}
 
 }

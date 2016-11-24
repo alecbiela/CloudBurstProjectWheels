@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
     protected Animator anim;
     protected Sprite currentSprite;
     protected Rigidbody2D rigidB;
+    protected bool endGame;
 
     public float wallFriction = 2;
     public float runSpeed = 5;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour {
     public float jumpForce = 1;
     public float maxVelocity = 2;
     public float mass = 1;
+    public float health;
     public BoxCollider2D slidingCol, notSlidingCol;
     public GameObject bulletPrefab;
 
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour {
     {
         Move();
         CheckCombat();
+        EndGame();
     }
 
     //checks inputs and sets flags accordingly
@@ -238,6 +241,12 @@ public class Player : MonoBehaviour {
 
             inAir = false;
         }
+        //if collides with Enemy...
+        if(col.gameObject.tag == "Enemy")
+        {
+            //Take 5 Damage
+            health -= 5;
+        }
     }
 
     void OnCollisionExit2D(Collision2D col)
@@ -261,6 +270,18 @@ public class Player : MonoBehaviour {
             rigidB.velocity.Set(0, 0);
             rigidB.AddForce(new Vector2(0, wallFriction));
         }
+    }
+
+    void EndGame()
+    {
+        //if health is lower than 0...
+        if(health <= 0)
+        {
+            //Destroy Player
+            DestroyObject(gameObject);
+        }
+        //Set EndGame boolean to true
+        endGame = true;
     }
 
 
